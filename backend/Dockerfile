@@ -5,11 +5,11 @@ MAINTAINER yusungkim@me.com
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package.json .
-COPY yarn.lock .
+COPY ./app/package.json .
+COPY ./app/yarn.lock .
 RUN yarn
 
-COPY . .
+COPY ./app/. .
 
 EXPOSE 3000
 
