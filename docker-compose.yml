@@ -1,0 +1,79 @@
+version: "3.9"
+
+services:
+  # INITIALIZE PJ
+  # Run "docker-compose up --build"
+
+  # front initialize
+  nextjs-init:
+    platform: linux/amd64 # for M1 chip
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile.init
+    volumes:
+      - ./frontend/app:/usr/src/todo
+
+  # backend initialize
+  nestjs-init:
+    platform: linux/amd64 # for M1 chip
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile.init 
+    volumes:
+      - ./backend/app:/usr/src/todo
+
+  # nextjs:
+  #   platform: linux/amd64 # for M1 chip
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: ./Dockerfile
+  #   volumes:
+  #     - ./frontend/app:/usr/src/app
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - todo
+  #   depends_on:
+  #     - postgres
+  #     - nestjs
+
+  # nestjs:
+  #   platform: linux/amd64 # for M1 chip
+  #   build:
+  #     context: ./backend
+  #     dockerfile: ./Dockerfile
+  #   volumes:
+  #     - ./backend/app:/usr/src/app
+  #   ports:
+  #     - 3001:3000
+  #   networks:
+  #     - todo
+  #   depends_on:
+  #     - postgres
+
+  # postgres:
+  #   image: postgres:14.4-alpine
+  #   environment:
+  #     POSTGRES_DATABASE: '${DB_DATABASE:-dev}'
+  #     POSTGRES_USER: '${DB_USERNAME:-docker}'
+  #     POSTGRES_PASSWORD: '${DB_PASSWORD:-docker}'
+  #   volumes:
+  #     - postgresqldb:/var/lib/postgresql
+  #   restart: always
+  #   networks:
+  #     - todo
+
+  # studio:
+  #   image: todo_nestjs
+  #   volumes:
+  #     - ./backend/app:/usr/src/app
+  #   command: bash -c "yarn prisma studio"
+  #   ports:
+  #     - 5555:5555
+
+networks:
+  todo:
+
+volumes:
+  postgresqldb:
+

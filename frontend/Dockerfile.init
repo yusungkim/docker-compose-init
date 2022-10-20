@@ -1,0 +1,5 @@
+FROM node:16.13.2
+
+WORKDIR /usr/src
+
+CMD ["npx", "create-next-app", "--typescript", "todo"]

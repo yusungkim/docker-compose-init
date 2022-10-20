@@ -1,0 +1,7 @@
+FROM node:16.13.2
+
+WORKDIR /usr/src
+
+RUN npm i -g @nestjs/cli
+
+CMD ["nest","new","todo","--package-manager=yarn","--language=TypeScript","--collection=@nestjs/schematics"]
