@@ -64,12 +64,17 @@ services:
   #     - todo
 
   # studio:
-  #   image: todo_nestjs
+  #   image: todo-nestjs
   #   volumes:
   #     - ./backend/app:/usr/src/app
   #   command: bash -c "yarn prisma studio"
   #   ports:
   #     - 5555:5555
+  #   depends_on:
+  #     - postgres
+  #     - nestjs
+  #   networks:
+  #     - todo
 
 networks:
   todo:
